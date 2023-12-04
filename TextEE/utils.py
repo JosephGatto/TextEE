@@ -2,8 +2,12 @@ import os, logging, json, _jsonnet, random, datetime, pprint
 import numpy as np
 import torch
 from argparse import Namespace
-from models import *
+#from models import *
 import ipdb
+
+from models import BartGenEAETrainer, XGearEAETrainer, PAIEEAETrainer, UniSTEDTrainer, DegreeEAETrainer, DegreeEDTrainer, DegreeE2ETrainer
+from models import QueryAndExtractEAETrainer, QueryAndExtractEDTrainer, TagPrimeEAETrainer, TagPrimeEDTrainer, RCEEEAETrainer, RCEEEDTrainer
+from models import EEQAEAETrainer, EEQAEDTrainer, CRFTaggingEAETrainer, CRFTaggingEDTrainer, OneIEE2ETrainer, DyGIEppE2ETrainer
 
 logger = logging.getLogger(__name__)
 
@@ -29,8 +33,8 @@ TRAINER_MAP = {
     ("PAIE", "EAE"): PAIEEAETrainer, 
     ("XGear", "EAE"): XGearEAETrainer,
     ("BartGen", "EAE"): BartGenEAETrainer,
-    ("Ampere", "EAE"): AmpereEAETrainer,
-    ("AMRIE", "E2E"): AMRIEE2ETrainer,
+    # ("Ampere", "EAE"): AmpereEAETrainer,
+    # ("AMRIE", "E2E"): AMRIEE2ETrainer,
 }
 
 def load_config(config_fn):
