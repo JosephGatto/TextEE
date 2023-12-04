@@ -62,8 +62,10 @@ def convert_format(objs):
     for obj in tqdm(objs, ncols=100):
         
         tokens = []
-        for s in obj["sentences"]:
+        token_snt_map = []
+        for sentence_id, s in (obj["sentences"]):
             tokens.extend(s)
+            token_snt_map.extend([sentence_id]*len(s))
             
         token_lens = [len(x) for x in tokens]
         
@@ -125,6 +127,7 @@ def convert_format(objs):
             "wnd_id": f"{obj['doc_key']}_1", 
             "text": " ".join(tokens), 
             "tokens": tokens, 
+            "token_snt_map":token_snt_map,
             "event_mentions": event_mentions, 
             "entity_mentions": entity_mentions, 
             "lang": "en", 
