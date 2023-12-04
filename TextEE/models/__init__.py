@@ -11,4 +11,4 @@ from .PAIE import PAIEEAETrainer
 from .XGear import XGearEAETrainer
 from .Ampere import AmpereEAETrainer
 from .BartGen import BartGenEAETrainer
-from .AMRIE import AMRIEE2ETrainer
+# from .AMRIE import AMRIEE2ETrainer
