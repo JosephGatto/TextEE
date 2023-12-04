@@ -63,7 +63,7 @@ def convert_format(objs):
         
         tokens = []
         token_snt_map = []
-        for sentence_id, s in (obj["sentences"]):
+        for sentence_id, s in enumerate(obj["sentences"]):
             tokens.extend(s)
             token_snt_map.extend([sentence_id]*len(s))
             
