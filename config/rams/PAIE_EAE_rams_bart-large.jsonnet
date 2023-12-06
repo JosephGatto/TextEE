@@ -37,7 +37,7 @@ local pretrained_model_alias = {
     
     
     // train config
-    "max_epoch": 90,
+    "max_epoch": 15,
     "warmup_epoch": 5,
     "accumulate_step": 1,
     "train_batch_size": 4,
