@@ -23,7 +23,8 @@ def EAE_collate_fn(batch):
         batch_token_num=[instance["token_num"] for instance in batch], 
         batch_text=[instance["text"] for instance in batch], 
         batch_trigger=[instance["trigger"] for instance in batch], 
-        batch_arguments=[instance["arguments"] for instance in batch], 
+        batch_arguments=[instance["arguments"] for instance in batch],
+        batch_token_snt_map=[instance["token_snt_map"] for instance in batch],
     )
 
 class PAIEEAETrainer(BasicTrainer):
@@ -69,7 +70,8 @@ class PAIEEAETrainer(BasicTrainer):
                       "token_num": len(dt["tokens"]), 
                       "text": dt["text"], 
                       "trigger": dt["trigger"], 
-                      "arguments": dt["arguments"]
+                      "arguments": dt["arguments"],
+                      "token_snt_map": dt["token_snt_map"],
                      }
             
             new_data.append(new_dt)
@@ -167,14 +169,15 @@ class PAIEEAETrainer(BasicTrainer):
                                                      shuffle=False, collate_fn=EAE_collate_fn)):
             progress.update(1)
             batch_pred_arguments = self.model.predict(batch)
-            for doc_id, wnd_id, tokens, text, trigger, pred_arguments in zip(batch.batch_doc_id, batch.batch_wnd_id, batch.batch_tokens, batch.batch_text, 
-                                                                             batch.batch_trigger, batch_pred_arguments):
+            for doc_id, wnd_id, tokens, text, trigger, pred_arguments, token_snt_map in zip(batch.batch_doc_id, batch.batch_wnd_id, batch.batch_tokens, batch.batch_text, 
+                                                                             batch.batch_trigger, batch_pred_arguments, batch.batch_token_snt_map):
                 prediction = {"doc_id": doc_id,  
                               "wnd_id": wnd_id, 
                               "tokens": tokens, 
                               "text": text, 
                               "trigger": trigger, 
-                              "arguments": pred_arguments
+                              "arguments": pred_arguments,
+                              "token_snt_map":token_snt_map,
                              }
                 
                 predictions.append(prediction)
