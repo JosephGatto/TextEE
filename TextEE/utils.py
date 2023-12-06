@@ -288,6 +288,7 @@ def load_EAE_data(file, add_extra_info_fn, config):
                         "text": dt["text"], 
                         "trigger": trigger, 
                         "arguments": arguments, 
+                        "token_snt_map": dt["token_snt_map"]
                        }
 
             instances.append(instance)
